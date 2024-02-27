@@ -14,7 +14,7 @@ export async function middleware(req) {
         text:"Requested page: "+page.slice(0,500),
       },
     }],
-  }})
+  },method:"POST"})
   //if(page==="mini.png"){
     // Display the image...
   //}else 
