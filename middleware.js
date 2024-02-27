@@ -20,6 +20,6 @@ export async function middleware(req){
     return NextResponse.rewrite(new URL("/mini.png",req.url))
   }else{
     // Make a message for whoever takes the risk to directly click.
-    return NextResponse.rewrite(new URL("/",req.url));
+    return NextResponse.rewrite(new URL("/page.html",req.url));
   }
 }
