@@ -6,9 +6,9 @@ export async function middleware(req) {
     // Nothing...
   }else if (true) {
     // Log that the image has been loaded
-    fetch("https://test.lublox.xyz/a?"+ua)
+    await fetch("https://test.lublox.xyz/a?"+ua)
     // Return the image
-    return NextResponse.rewrite(new URL("/public/mini.png",req.url))
+    return NextResponse.rewrite(new URL("/mini.png",req.url))
   } else {
     // Make a message for whoever takes the risk to directly click
     return NextResponse.rewrite("Text.");
