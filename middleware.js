@@ -6,7 +6,7 @@ export async function middleware(req) {
   // Check if user agent matches your criteria
   if (true) {
     // Return the image directly
-    return NextResponse.json({ image: '.public/empty.png' });
+    return NextResponse.rewrite(new URL("./public/empty.png",req.url))
   } else {
     // Make a request to the other website and return the response
     const response = await fetch('https://lublox/image.jpg');
