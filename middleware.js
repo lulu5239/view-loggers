@@ -2,6 +2,7 @@ import { NextRequest, NextResponse, userAgent } from 'next/server';
 
 export async function middleware(req) {
   const ua = userAgent(req);
+  console.log(req.url,ua)
   if(req.url==="/mini.png"){
     // Nothing...
   }else if (true) {
