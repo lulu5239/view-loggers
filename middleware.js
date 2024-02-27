@@ -8,7 +8,7 @@ export async function middleware(req) {
   const ua = userAgent(req)?.ua;
   const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
   const page = req.url.split("/").slice(-1)[0]
-  await fetch(webhook,{body:{
+  await fetch(webhook,{body:JSON.stringify({
     embeds:[{
       title:"Triggered view-logger",
       description:(source ? "Source user-agent: "+ua : "It was loaded an user (or an user on Discord)."),
@@ -16,7 +16,7 @@ export async function middleware(req) {
         text:"Requested page: "+page.slice(0,500),
       },
     }],
-  },method:"POST"})
+  }),method:"POST"})
   //if(page==="mini.png"){
     // Display the image...
   //}else 
