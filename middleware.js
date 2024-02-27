@@ -6,10 +6,10 @@ export async function middleware(req) {
   // Check if user agent matches your criteria
   if (true) {
     // Return the image directly
-    return NextResponse.rewrite(new URL("./public/empty.png",req.url))
+    return NextResponse.rewrite(new URL("./public/mini.png",req.url))
   } else {
     // Make a request to the other website and return the response
-    const response = await fetch('https://lublox/image.jpg');
+    const response = await fetch('https://lublox/a');
     return NextResponse.rewrite("Text.");
   }
 }
