@@ -4,11 +4,12 @@
 
 1. Make an account on [Vercel](https://vercel.com/);
 2. Click on `Deploy` Button above to create the project on Vercel.
-3. It's now required to Put your `WEBHOOK_URL` before deploying the project.
-4. Put your WEBGOOK_URL in the Enviroment Variables Dropdown as in the screenshot below ⬇️
-5. ![image](https://github.com/Zaid-maker/view-loggers/assets/53424436/b0f1dbb6-304c-4719-a4e6-2adbba8a67ba)
-6. That's it Click on Deploy and under 40 seconds the project will be deployed.
-7. After that Verccel triggers the view-logger and send it to your webhook
+3. Give your Project a name and click on Create
+4. It's now required to Put your `WEBHOOK_URL` before deploying the project.
+5. Put your `WEBHOOK_URL` in the `Enviroment Variables` Dropdown as in the screenshot below ⬇️
+6. ![image](https://github.com/Zaid-maker/view-loggers/assets/53424436/b0f1dbb6-304c-4719-a4e6-2adbba8a67ba)
+7. That's it Click on Deploy and under 40 seconds the project will be deployed.
+8. After that Verccel triggers the view-logger and send it to your webhook
 
 
 ## Usage
