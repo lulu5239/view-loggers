@@ -3,10 +3,13 @@
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flulu5239%2Fview-loggers&env=WEBHOOK_URL&envDescription=Paste%20your%20Discord%2FGuilded%20Webhook%20URL)
 
 1. Make an account on [Vercel](https://vercel.com/);
-2. Prepare your `WEBHOOK_URL` and paste it under Enviroment Variable. `WEBHOOK_URL=your-url`
-3. Use [this link](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Flulu5239%2Fview-loggers) to clone this GitHub repository;
-4. Your project should be deployed after around 40 seconds, and the `vercel.app` subdomain you get should work.
-*Vercel itself might trigger the view-logger by using pages of the website.*
+2. Click on `Deploy` Button above to create the project on Vercel.
+3. It's now required to Put your `WEBHOOK_URL` before deploying the project.
+4. Put your WEBGOOK_URL in the Enviroment Variables Dropdown as in the screenshot below ⬇️
+5. ![image](https://github.com/Zaid-maker/view-loggers/assets/53424436/b0f1dbb6-304c-4719-a4e6-2adbba8a67ba)
+6. That's it Click on Deploy and under 40 seconds the project will be deployed.
+7. After that Verccel triggers the view-logger and send it to your webhook
+
 
 ## Usage
 
