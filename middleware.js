@@ -24,7 +24,5 @@ export async function middleware(req){
     }else{
       return redirect ? NextResponse.redirect(new URL(redirect.startsWith("https://") ? redirect : ("https://" + redirect))) : NextResponse.rewrite(new URL("/page.html", req.url));
     }
-  } else {
-    await fetch(webhook,{body: JSON.stringify({"content":"FAVICON OR VERCEL"}), headers:{"content-type":"application/json"}, method:"POST"})
   }
 }
