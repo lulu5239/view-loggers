@@ -1,0 +1,33 @@
+name: 👀 Detect committed Discord Webhook
+run-name: 🔍 Searching for a Discord Webhook URL within commit contents 
+on: [pull_request]
+jobs:
+  detect-discord-webhooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🆕 Check out repository code
+        uses: actions/checkout@v4
+      - name: 🔍 Search for a Discord Webhook URL
+        id: regex_search
+        run: |
+          set +e
+          git grep -P -q "(discord|discordapp).com\/api\/webhooks\/([\d]+)\/([a-zA-Z0-9_.-])*" $(git rev-list --all)
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+      - name: 💬 Place a comment on the PR and close
+        if: steps.regex_search.outputs.exit_code == 0
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '# 🔴 WEBHOOK URL DETECTED\n\n### A Discord Webhook URL has been detected within your commit contents.\n\nPlease refer to the `README.md` and use the `.env` file for inputting a Webhook URL.\n\n*This PR will now be closed for your own safety, **please reset your Webhook URL** as other people could use it to send messages to the channel where the Webhook was created!*'
+            })
+
+            github.rest.pulls.update({
+              pull_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'closed'
+            })
