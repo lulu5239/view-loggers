@@ -1,4 +1,4 @@
-name: 👀 Detect committed Discord webhooks
+name: 👀 Detect committed Discord Webhook
 run-name: 🔍 Searching for a Discord webhook token within commit contents 
 on: [pull_request]
 jobs:
@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: 🆕 Check out repository code
         uses: actions/checkout@v4
-      - name: 🔍 Search for Discord webhook token
+      - name: 🔍 Search for a Discord Webhook token
         id: regex_search
         run: |
           set +e
@@ -22,7 +22,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '# 🔴 WEBHOOK URL DETECTED\n\n### A Discord webhook token has been detected within your commit contents.\n\nPlease refer to the `README.md` and use the `.env` file for inputting a webhook URL.\n\n*This PR will now be closed for your own safety, **please reset your webhook URL** as other people could use it to send messages to the channel where the webhook was created!*'
+              body: '# 🔴 WEBHOOK URL DETECTED\n\n### A Discord Webhook token has been detected within your commit contents.\n\nPlease refer to the `README.md` and use the `.env` file for inputting a Webhook URL.\n\n*This PR will now be closed for your own safety, **please reset your Webhook URL** as other people could use it to send messages to the channel where the Webhook was created!*'
             })
 
             github.rest.pulls.update({
