@@ -11,7 +11,7 @@
 
 *Vercel should trigger the view-logger a few times.*
 
-You won't need to edit the files to enter your webhook URL, because you should have already entered it at step 4. *If needed, you can still edit it in the `.env` file.*
+You won't need to edit the files to enter your webhook URL, because you should have already entered it at step 4. *If needed, you can still edit it in the project settings in Vercel, as explained [here](https://github.com/lulu5239/view-loggers/issues/10#issuecomment-1995980025).*
 
 ## Usage
 
