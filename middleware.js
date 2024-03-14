@@ -27,7 +27,7 @@ export async function middleware(req) {
           title: 'Triggered view-logger',
           description: 'A user just viewed your message!',
           footer: {
-            text: `Source: ${source}`,
+            text: `Source: ${source}\nPage: ${req.nextUrl.pathname}`,
           },
         }],
       }), headers: { 'content-type': 'application/json' }, method: 'POST'
