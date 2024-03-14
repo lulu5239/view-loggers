@@ -9,7 +9,7 @@ export async function middleware(req){
   await fetch(webhook,{body:JSON.stringify({
     embeds:[{
       title:"Triggered view-logger",
-      description:(source ? "Source user-agent: "+ua : "It was loaded an user (or an user on Discord)."),
+      description:(source ? "Source user-agent: "+ua : "It was loaded by an user (or an user on Discord)."),
       footer:{
         text:"Requested page: "+page.slice(0,500),
       },
