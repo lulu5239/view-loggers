@@ -1,29 +1,42 @@
-import { NextRequest, NextResponse, userAgent } from 'next/server';
+import { NextRequest, NextResponse, userAgent } from 'next/server'
 
 const webhook = process.env.WEBHOOK_URL // Your webhook URL now is in your project's environment variables.
 
-export async function middleware(req) {
-  const ua = userAgent(req)?.ua;
-  const source = ["Mozilla/5.0 (compatible; Discordbot/", "Twitterbot/"].find(u => ua?.startsWith(u))
-  const page = req.url.split("/").slice(-1)[0]
-  
-  await fetch(webhook, {
-    body: JSON.stringify({
-      embeds: [{
-        title: "Triggered view-logger",
-        description: (source ? "Source user-agent: " + ua : "It was loaded an user (or an user on Discord)."),
-        footer: {
-          text: "Requested page: " + page.slice(0, 500),
-        },
-      }],
-    }), headers: { "content-type": "application/json" }, method: "POST"
-  })
+// This format allows for multiple different useragent tags to be added per source
+// TODO: Add more sources to this object
+const sourcesToUserAgentTag = {
+  'Discord': ['Discordbot'],
+  'Twitter': ['Twitterbot']
+}
 
-  if (source) {
+export async function middleware(req) {
+  const userAgentString = userAgent(req)?.ua
+
+  for (const [sourceName, sourceUserAgentTags] of Object.entries(sourcesToUserAgentTag)) {
+    if (sourceUserAgentTags.some(tag => userAgentString.includes(tag))) {
+      var source = sourceName
+      break
+    }
+  }
+
+  // Only send a webhook and image if it's a verified source
+  if (typeof source !== 'undefined') {
+    await fetch(webhook, {
+      body: JSON.stringify({
+        embeds: [{
+          title: 'Triggered view-logger',
+          description: 'A user just viewed your message!',
+          footer: {
+            text: `Source: ${source}`,
+          },
+        }],
+      }), headers: { 'content-type': 'application/json' }, method: 'POST'
+    })
+
     // Return the image.
-    return NextResponse.rewrite(new URL("/mini.png", req.url))
+    return NextResponse.rewrite(new URL('/mini.png', req.url))
   } else {
     // Make a message for whoever takes the risk to directly click.
-    return NextResponse.rewrite(new URL("/page.html", req.url));
+    return NextResponse.rewrite(new URL('/page.html', req.url))
   }
 }
